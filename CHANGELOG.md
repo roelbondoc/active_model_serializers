@@ -1,5 +1,9 @@
 # UNRELEASED
 
+# VERSION 0.8.2
+
+* Fix bug whereby a serializer does not cache side loaded relations
+
 # VERSION 0.8.1
 
 * Fix bug whereby a serializer using 'options' would blow up.
