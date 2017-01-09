@@ -60,7 +60,15 @@ module ActiveModel
         end
 
         def root
-          option(:root) || @name
+          option_root || @name
+        end
+
+        def option_root
+          if option(:root).respond_to?(:call)
+            option(:root).call(@source).to_sym
+          else
+            option(:root)
+          end
         end
 
         def name
@@ -157,7 +165,7 @@ module ActiveModel
         end
 
         def root
-          if root = option(:root)
+          if root = option_root
             root
           elsif polymorphic?
             associated_object.class.to_s.pluralize.demodulize.underscore.to_sym
